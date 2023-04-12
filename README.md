@@ -30,6 +30,76 @@ As your first task, you've got to enable the different layers of the burger on t
 
 ### Progression 2: LAYER THEM UP
 
+
+
+
+
+
+# Train Iris Boosting model and save it to PMML format
+
+import lightgbm
+import pandas as pd
+from sklearn import datasets
+from sklearn2pmml import sklearn2pmml
+from sklearn2pmml.pipeline import PMMLPipeline
+from sklearn.model_selection import train_test_split
+
+# load iris dataset
+iris = datasets.load_iris()
+feature_names = iris["feature_names"]
+
+# Train and test split
+df = pd.DataFrame(data=iris["data"], columns=feature_names)
+df.loc[:, "y"] = iris["target"]
+df.head()
+
+df_train, df_test, _, _ = train_test_split(df, df["y"], test_size=0.2, random_state=42)
+
+## Train the model with PMML wraper
+clf = PMMLPipeline(
+    [
+        (
+            "classifier",
+            lightgbm.LGBMClassifier(),
+        )
+    ]
+)
+
+clf.fit(df_train[feature_names], df_train["y"])
+
+## Test the model
+clf.score(df_test[feature_names], df_test["y"])
+# Output: 1.0
+
+## Save model to PMML
+sklearn2pmml(clf, "boosting_model.pmml", with_repr=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Setup `EventListeners`, so that we can add or remove different ingredients by clicking on the respective ingredient buttons. That's the whole point of it.
 
 ### Challenge 1: IT GETS CHEESEY
