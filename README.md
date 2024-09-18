@@ -115,3 +115,50 @@ Show the customer only the ingredients that they've selected on the chalk board.
 The customer has had a good time customizing his brrrgrrr. Time for him to pay. Use ingredient prices to calculate the cost of a brrrgrrr and display it to the customer.
 
 Happy Coding ProGrad ❤️
+function App() {
+  const [twoTrue, settwoTrue] = useState(false);
+  return (
+    <div className="grandfather">
+      <div className="father">
+        {twoTrue ? (
+          <div className="main">
+            <div className="grandson">
+              <div>
+                <input 
+                  type="checkbox"
+                  id="vehicle1"
+                  name="vehicle1"
+                  value={twoTrue}
+                  onClick={() => settwoTrue(!twoTrue)}
+                />
+              </div>
+              <div></div>
+              <div>
+                <input type="text"  className="inpu"/>
+              </div>
+            </div>
+            <div className="son"></div>
+          </div>
+        ) : (
+          <div className="grandson">
+            <div>
+              <input
+                type="checkbox"
+                id="vehicle1"
+                name="vehicle1"
+                value={twoTrue}
+                onClick={() => settwoTrue(!twoTrue)}
+              />
+            </div>
+            <div></div>
+            <div>
+              <input type="text"  className="inpu"/>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
